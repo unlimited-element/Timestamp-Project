@@ -28,7 +28,7 @@ app.get("/api/", (req, res) => {
 app.get("/api/:date?", function (req, res) {
   // create date variable that adds whatever date is in URL
   // if no date, add current date
-  let date = req.params.date;
+  let date = req.params.date ? new Date(parseInt(req.params.date)) : new Date();
 
   if (/\d{5,}/.test(req.params.date)) {
       res.json({unix: req.params.date, utc: new Date(parseInt(req.params.date)).toUTCString() });
