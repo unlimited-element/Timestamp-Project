@@ -31,7 +31,7 @@ app.get("/api/:date?", function (req, res) {
   let date = req.params.date ? new Date(req.params.date) : new Date();
 
   if (/\d{5,}/.test(req.params.date)) {
-      res.json({unix: req.params.date, utc: new Date(parseInt(req.params.date)).toUTCString() });
+      res.json({unix: + " " + req.params.date, utc: + " " + new Date(parseInt(req.params.date)).toUTCString() });
     }
 // if invalid ISO, check unix format
 else if (date.toUTCString() === "Invalid Date") {
