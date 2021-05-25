@@ -21,11 +21,11 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
-app.get("/api/timestamp/", (req, res) => {
+app.get("/api/", (req, res) => {
   res.json({ unix: Date.now(), utc: Date() });
 });
 
-app.get("/api/timestamp/:date?", function (req, res) {
+app.get("/api/:date?", function (req, res) {
   // create date variable that adds whatever date is in URL
   // if no date, add current date
   let date = req.params.date ? new Date(req.params.date) : new Date();
