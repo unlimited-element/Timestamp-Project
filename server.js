@@ -22,15 +22,15 @@ app.get("/api/hello", function (req, res) {
 });
 
 app.get("/api/:date?", function (req, res) {
-  let date = req.params.date_string ? new Date(req.params.date_string) : new Date();
+  let date = req.params.date ? new Date(req.params.date) : new Date();
+
 // if invalid from ISO-8601, check unix format
 if (date.toUTCString() === "Invalid Date") {
-  date = new Date(parseInt(req.params.date_string));
-}
-if (date.toUTCString() === "Invalid Date") {
+  date = new Date(parseInt(req.params.date));
   res.json({error: "Invalid Date"});
-} else {
-  res.json({unix: date.valueOf(), utc: date.toUTCString()});
+}
+ else {
+  res.json({unix: date, utc: date.toUTCString()});
 }
 });
 
