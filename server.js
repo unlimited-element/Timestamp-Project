@@ -21,7 +21,7 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
-app.get("/api/:date_string", function (req, res) {
+app.get("/api/:date_string?", function (req, res) {
   // create date variable that adds whatever date is in URL
   // if no date, add current date
   let date = req.params.date_string ? new Date(req.params.date_string) : new Date();
@@ -31,7 +31,7 @@ app.get("/api/:date_string", function (req, res) {
     }
 // if invalid ISO, check unix format
 else if (date.toUTCString() === "Invalid Date") {
-  date = new Date(parseInt(req.params.date_string));
+  // date = new Date(parseInt(req.params.date_string));
 
   res.json({error: "Invalid Date"});
 }
