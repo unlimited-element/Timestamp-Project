@@ -22,18 +22,25 @@ app.get("/api/hello", function (req, res) {
 });
 
 app.get("/api/:date?", function (req, res) {
+  // create date variable that adds whatever date is in URL
+  // if no date, add current date
   let date = req.params.date ? new Date(req.params.date) : new Date();
 
+  if (/\d{5,}/.test(req.params.date)) {
+      let dateInt = parseInt(date);
+      res.json({ unix: req.params.date, utc: new Date(parseInt(req.params.date)).toUTCString() });
+    }
 // if invalid from ISO-8601, check unix format
-if (date.toUTCString() === "Invalid Date") {
+else if (date.toUTCString() === "Invalid Date") {
   date = new Date(parseInt(req.params.date));
+
   res.json({error: "Invalid Date"});
 }
  else {
   res.json({unix: date.valueOf(), utc: date.toUTCString()});
 }
 });
-console.log(new Date())
+
 
 // listen for requests :)
 var listener = app.listen(port, function () {
