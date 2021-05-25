@@ -30,10 +30,10 @@ if (date.toUTCString() === "Invalid Date") {
   res.json({error: "Invalid Date"});
 }
  else {
-  res.json({unix: date, utc: date.toUTCString()});
+  res.json({unix: date.valueOf(), utc: date.toUTCString()});
 }
 });
-
+console.log(new Date())
 
 // listen for requests :)
 var listener = app.listen(port, function () {
