@@ -21,12 +21,16 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
-app.get("/api/:date_string?", function (req, res) {
+app.get("/api/timestamp/", (req, res) => {
+  res.json({ unix: Date.now(), utc: Date() });
+});
+
+app.get("/api/timestamp/:date_string?", function (req, res) {
   // create date variable that adds whatever date is in URL
   // if no date, add current date
   let date = req.params.date_string ? new Date(req.params.date_string) : new Date();
 
-  if (/\d{5,}/.test(req.params.date_string)) {
+  if (/\d{5,}/.test(__dirname + req.params.date_string)) {
       res.json({unix: req.params.date_string, utc: new Date(parseInt(req.params.date_string)).toUTCString() });
     }
 // if invalid ISO, check unix format
