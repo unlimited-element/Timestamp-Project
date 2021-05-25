@@ -27,7 +27,6 @@ app.get("/api/:date?", function (req, res) {
   let date = req.params.date ? new Date(req.params.date) : new Date();
 
   if (/\d{5,}/.test(req.params.date)) {
-      let dateInt = parseInt(date);
       res.json({ unix: req.params.date, utc: new Date(parseInt(req.params.date)).toUTCString() });
     }
 // if invalid from ISO-8601, check unix format
